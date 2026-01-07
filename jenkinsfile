@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                // Supprime le workspace précédent
+                sh 'rm -rf $WORKSPACE/*'
+
+                // Cloner la branche main via HTTPS (public)
+                sh 'git clone --branch main https://github.com/anis-dvp/ansible-jenkins.git .'
+                
+                // OU si tu veux SSH
+                // sh 'git clone --branch main git@github.com:anis-dvp/ansible-jenkins.git .'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Étapes de build ici'
+            }
+        }
+    }
+}
