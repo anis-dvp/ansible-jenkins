@@ -1,9 +1,10 @@
+---
 - name: Déploiement avec Ansible
   hosts: all
   become: yes
 
   vars:
-    myvariable: "Berriani"
+    myvariable: "Berriani"  # valeur par défaut si Jenkins ne passe rien
 
   tasks:
     - name: Mettre à jour les paquets
@@ -21,6 +22,8 @@
         src: index.html.j2
         dest: /usr/share/nginx/html/index.html
         mode: '0644'
+      vars:
+        myvariable: "{{ myvariable }}"  # prend la valeur passée depuis Jenkins
 
     - name: Vérifier la configuration Nginx
       command: nginx -t
