@@ -2,6 +2,9 @@
   hosts: all
   become: yes
 
+  vars:
+    myvariable: "Berriani"
+
   tasks:
     - name: Mettre à jour les paquets
       apt:
@@ -13,12 +16,19 @@
         name: nginx
         state: present
 
+    - name: Déployer la page d'accueil personnalisée
+      template:
+        src: index.html.j2
+        dest: /usr/share/nginx/html/index.html
+        mode: '0644'
+
     - name: Vérifier la configuration Nginx
       command: nginx -t
       ignore_errors: yes
 
-    - name: Démarrer nginx
+    - name: Redémarrer nginx
       service:
         name: nginx
-        state: started
+        state: restarted
         enabled: yes
+
