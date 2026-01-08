@@ -4,7 +4,7 @@
   become: yes
 
   vars:
-    myvariable: "Berriani"  # valeur par défaut si Jenkins ne passe rien
+    myvariable: "Berriani"  # valeur par défaut
 
   tasks:
     - name: Mettre à jour les paquets
@@ -34,4 +34,3 @@
         name: nginx
         state: restarted
         enabled: yes
-
