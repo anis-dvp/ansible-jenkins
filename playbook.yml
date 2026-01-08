@@ -13,4 +13,4 @@
     - name: Déployer la page d'accueil personnalisée
       template:
         src: index.html.j2
-        dest: /usr/share/nginx/html/index.html
+        dest: /var/www/html/index.html
