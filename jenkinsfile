@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    environment {
-        MAVARIABLE = 'DEFAUT' // valeur que tu veux passer au playbook
+    parameters {
+        string(name: 'myvariable', defaultValue: 'DEFAULT', description: 'Nom personnalisé')
     }
 
     stages {
@@ -19,7 +19,7 @@ pipeline {
                     become: true,
                     playbook: 'playbook.yml',
                     inventory: 'hosts.yml',
-                    extras: '--extra-vars "mavarariable=${MAVARIABLE}"'
+                    extras: "--extra-vars \"myvariable=${params.myvariable}\""
                 )
             }
         }
