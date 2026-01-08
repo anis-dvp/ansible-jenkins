@@ -1,9 +1,8 @@
 pipeline {
     agent any
 
-    // Définition de la variable d'environnement pour le pipeline
     environment {
-        MAVARIABLE = 'DEFAUT' // valeur par défaut si aucun paramètre n'est fourni
+        MAVARIABLE = 'DEFAUT' // valeur que tu veux passer au playbook
     }
 
     stages {
@@ -26,3 +25,4 @@ pipeline {
         }
     }
 }
+
