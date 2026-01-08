@@ -1,0 +1,26 @@
+---
+
+- name: Mettre à jour les paquets
+  apt:
+    update_cache: yes
+
+- name: Installer nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Déployer la page d'accueil personnalisée
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Vérifier la configuration Nginx
+  command: nginx -t
+
+- name: Redémarrer nginx
+  service:
+    name: nginx
+    state: restarted
