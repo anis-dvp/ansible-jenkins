@@ -1,14 +1,18 @@
 pipeline {
     agent any
+
+    // Définition de la variable d'environnement pour le pipeline
     environment {
-        MAVARIABLE = 'DEFAUT'
+        MAVARIABLE = 'DEFAUT' // valeur par défaut si aucun paramètre n'est fourni
     }
+
     stages {
         stage('Clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/anis-dvp/ansible-jenkins.git'
             }
         }
+
         stage('Ansible') {
             steps {
                 ansiblePlaybook(
@@ -16,7 +20,7 @@ pipeline {
                     become: true,
                     playbook: 'playbook.yml',
                     inventory: 'hosts.yml',
-                    extras: '--extra-vars "mavariable=${MAVARIABLE}"'
+                    extras: '--extra-vars "mavarariable=${MAVARIABLE}"'
                 )
             }
         }
