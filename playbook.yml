@@ -1,16 +1,9 @@
----
-- name: Déploiement avec Ansible
-  hosts: all
+- hosts: all
   become: yes
-
-  vars:
-    myvariable: "Berriani"  # valeur par défaut
-
   tasks:
     - name: Mettre à jour les paquets
       apt:
         update_cache: yes
-        cache_valid_time: 3600
 
     - name: Installer nginx
       apt:
@@ -21,16 +14,3 @@
       template:
         src: index.html.j2
         dest: /usr/share/nginx/html/index.html
-        mode: '0644'
-      vars:
-        myvariable: "{{ myvariable }}"  # prend la valeur passée depuis Jenkins
-
-    - name: Vérifier la configuration Nginx
-      command: nginx -t
-      ignore_errors: yes
-
-    - name: Redémarrer nginx
-      service:
-        name: nginx
-        state: restarted
-        enabled: yes
